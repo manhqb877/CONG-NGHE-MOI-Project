@@ -17,6 +17,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { AccountCircle, Lock } from '@mui/icons-material';
 import { ottEducationTheme } from '../theme/theme';
+import RegisterSuccessModal from '../components/RegisterSuccessModal';
 
 const AuthContainer = styled(Container)(() => ({
     minHeight: '100vh',
@@ -142,6 +143,7 @@ const Login = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
+    const [registerSuccessOpen, setRegisterSuccessOpen] = useState(false);
 
     useEffect(() => {
         if (location.state?.successMessage) {
@@ -154,6 +156,12 @@ const Login = () => {
     };
 
     const handleTogglePassword = () => setShowPassword((prev) => !prev);
+
+    const handleLoginFromModal = () => {
+        setIsLogin(true);
+        setRegisterSuccessOpen(false);
+        setFormData((prev) => ({ ...prev, password: '' }));
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -251,18 +259,20 @@ const Login = () => {
 
                 const data = await response.json();
 
-                // Nếu backend trả về token, tự động đăng nhập luôn
-                if (data.accessToken) {
-                    localStorage.setItem('accessToken', data.accessToken);
-                    localStorage.setItem('refreshToken', data.refreshToken);
-                    localStorage.setItem('userId', data.userId);
-                    navigate('/home');
-                } else {
-                    // Không có token, chuyển về trang đăng nhập
-                    setSuccessMessage('Đăng ký thành công! Vui lòng đăng nhập.');
-                    setIsLogin(true);
-                    setFormData((prev) => ({ ...prev, password: '', confirmPassword: '' }));
-                }
+                // Đăng ký thành công - hiển thị modal thông báo
+                setRegisterSuccessOpen(true);
+                setFormData({
+                    username: '',
+                    password: '',
+                    confirmPassword: '',
+                    email: '',
+                    phone: '',
+                    firstName: '',
+                    lastName: '',
+                    gender: 'MALE',
+                    birthday: '',
+                    code: '',
+                });
             } catch (err) {
                 setError(err.message);
             } finally {
@@ -627,6 +637,11 @@ const Login = () => {
                     </Box>
                 </AuthPaper>
             </AuthContainer>
+            <RegisterSuccessModal
+                open={registerSuccessOpen}
+                onClose={() => setRegisterSuccessOpen(false)}
+                onLoginClick={handleLoginFromModal}
+            />
         </ThemeProvider>
     );
 };

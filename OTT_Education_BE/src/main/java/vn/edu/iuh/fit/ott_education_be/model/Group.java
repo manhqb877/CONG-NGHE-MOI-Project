@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.Builder;
 import vn.edu.iuh.fit.ott_education_be.common.Roles;
 
 import org.springframework.data.annotation.CreatedDate;
@@ -22,6 +23,7 @@ import java.util.Map;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Group {
     @Id
     private String id;

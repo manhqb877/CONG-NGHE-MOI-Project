@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.Builder;
 import vn.edu.iuh.fit.ott_education_be.common.MessageStatus;
 import vn.edu.iuh.fit.ott_education_be.common.MessageType;
 
@@ -24,10 +25,13 @@ import java.util.Map;
 @Document(collection = "messages")
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Message {
     private String id;
     @Indexed
     private String senderId;
+    private String senderName;
+    private String senderAvatar;
     @Indexed
     private String receiverId;
     private String groupId;
