@@ -1,0 +1,249 @@
+[1G[0K⠙[1G[0K
+> ott-education@0.0.0 dev
+> vite
+
+[1G[0K⠙[1G[0K
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J
+  [32m[1mVITE[22m v6.4.1[39m  [2mready in [0m[1m2154[22m[2m[0m ms[22m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m5000[22m/[39m
+  [32m➜[39m  [1mNetwork[22m: [36mhttp://172.31.82.226:[1m5000[22m/[39m
+[2m[32m  ➜[39m[22m[2m  press [22m[1mh + enter[22m[2m to show help[22m
+[33mFiles in the public directory are served at the root path.
+Instead of [36m/public/icons8-ott-education.svg[33m, use [36m/icons8-ott-education.svg[33m.[39m
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[33mFiles in the public directory are served at the root path.
+Instead of [36m/public/icons8-ott-education.svg[33m, use [36m/icons8-ott-education.svg[33m.[39m [33m(x2)[39m
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[33mFiles in the public directory are served at the root path.
+Instead of [36m/public/icons8-ott-education.svg[33m, use [36m/icons8-ott-education.svg[33m.[39m [33m(x3)[39m
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[33mFiles in the public directory are served at the root path.
+Instead of [36m/public/icons8-ott-education.svg[33m, use [36m/icons8-ott-education.svg[33m.[39m [33m(x4)[39m
+[2m2:48:54 PM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /ws/info?t=1778683637061[39m
+Error: connect ECONNREFUSED 127.0.0.1:8080
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)
+[2m2:48:54 PM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /ws/info?t=1778683637529[39m
+Error: connect ECONNREFUSED 127.0.0.1:8080
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)
+[2m2:49:04 PM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /ws/info?t=1778683647193[39m
+Error: connect ECONNREFUSED 127.0.0.1:8080
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)
+[2m2:49:05 PM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /ws/info?t=1778683648530[39m
+Error: connect ECONNREFUSED 127.0.0.1:8080
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)
+[33mFiles in the public directory are served at the root path.
+Instead of [36m/public/icons8-ott-education.svg[33m, use [36m/icons8-ott-education.svg[33m.[39m
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[33mFiles in the public directory are served at the root path.
+Instead of [36m/public/icons8-ott-education.svg[33m, use [36m/icons8-ott-education.svg[33m.[39m [33m(x2)[39m
+[2m2:52:17 PM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /message/all-pinned-messages?otherUserId=6a048cb195cdceb2212131af[39m
+Error: connect ECONNREFUSED 127.0.0.1:8080
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)
+[2m2:52:17 PM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /message/chat-history/6a048cb195cdceb2212131af[39m
+Error: connect ECONNREFUSED 127.0.0.1:8080
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)
+[2m2:52:19 PM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /ws/info?t=1778683842537[39m
+Error: connect ECONNREFUSED 127.0.0.1:8080
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)
+[2m2:52:20 PM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /ws/info?t=1778683842925[39m
+Error: connect ECONNREFUSED 127.0.0.1:8080
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)
+[2m2:52:21 PM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /message/chat-history/6a048cb195cdceb2212131b0[39m
+Error: connect ECONNREFUSED 127.0.0.1:8080
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)
+[2m2:52:21 PM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /message/all-pinned-messages?otherUserId=6a048cb195cdceb2212131b0[39m
+Error: connect ECONNREFUSED 127.0.0.1:8080
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)
+[2m2:52:30 PM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /ws/info?t=1778683853037[39m
+Error: connect ECONNREFUSED 127.0.0.1:8080
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)
+[2m2:52:30 PM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /ws/info?t=1778683853539[39m
+Error: connect ECONNREFUSED 127.0.0.1:8080
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)
+[2m2:52:40 PM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /ws/info?t=1778683863203[39m
+Error: connect ECONNREFUSED 127.0.0.1:8080
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)
+[2m2:52:41 PM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /ws/info?t=1778683864529[39m
+Error: connect ECONNREFUSED 127.0.0.1:8080
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)
+[2m2:52:50 PM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /ws/info?t=1778683873384[39m
+Error: connect ECONNREFUSED 127.0.0.1:8080
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)
+[2m2:52:52 PM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /ws/info?t=1778683875536[39m
+Error: connect ECONNREFUSED 127.0.0.1:8080
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)
+[2m2:53:01 PM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /ws/info?t=1778683883630[39m
+Error: connect ECONNREFUSED 127.0.0.1:8080
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)
+[2m2:53:01 PM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /message/chat-history/6a048cb195cdceb2212131af[39m
+Error: connect ECONNREFUSED 127.0.0.1:8080
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)
+[2m2:53:01 PM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /message/all-pinned-messages?otherUserId=6a048cb195cdceb2212131af[39m
+Error: connect ECONNREFUSED 127.0.0.1:8080
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)
+[2m2:53:03 PM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /ws/info?t=1778683886532[39m
+Error: connect ECONNREFUSED 127.0.0.1:8080
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)
+[33mFiles in the public directory are served at the root path.
+Instead of [36m/public/icons8-ott-education.svg[33m, use [36m/icons8-ott-education.svg[33m.[39m
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[33mFiles in the public directory are served at the root path.
+Instead of [36m/public/icons8-ott-education.svg[33m, use [36m/icons8-ott-education.svg[33m.[39m [33m(x2)[39m
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[33mFiles in the public directory are served at the root path.
+Instead of [36m/public/icons8-ott-education.svg[33m, use [36m/icons8-ott-education.svg[33m.[39m [33m(x3)[39m
