@@ -271,19 +271,14 @@ const Home = () => {
             if (!isMounted) return;
             console.log('Received friend request notification:', notification);
             if (notification.type === 'accepted') {
-                // Thông báo cho người gửi (A)
-                await updateFriendsList(); // Làm mới danh sách bạn bè
-                setSnackbarMessage(
-                    'Yêu cầu kết bạn của bạn đã được chấp nhận!',
-                );
+                await updateFriendsList();
+                setSnackbarMessage('Yêu cầu kết bạn của bạn đã được chấp nhận!');
                 setSnackbarSeverity('success');
-            } else if (notification.type === 'confirmed') {
-                // Thông báo cho người nhận (B)
-                await updatePendingRequests(); // Làm mới danh sách yêu cầu
-                setSnackbarMessage('Bạn đã chấp nhận một yêu cầu kết bạn!');
-                setSnackbarSeverity('success');
+            } else if (notification.type === 'rejected') {
+                await updatePendingRequests();
+                setSnackbarMessage('Lời mời kết bạn của bạn đã bị từ chối.');
+                setSnackbarSeverity('warning');
             } else {
-                // Yêu cầu kết bạn mới
                 await updatePendingRequests();
                 setSnackbarMessage('Bạn nhận được một yêu cầu kết bạn mới!');
                 setSnackbarSeverity('info');

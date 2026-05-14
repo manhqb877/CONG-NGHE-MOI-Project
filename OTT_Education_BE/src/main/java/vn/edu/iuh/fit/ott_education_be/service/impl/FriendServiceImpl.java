@@ -12,6 +12,7 @@ import vn.edu.iuh.fit.ott_education_be.exception.ResourceNotFoundException;
 import vn.edu.iuh.fit.ott_education_be.model.Friend;
 import vn.edu.iuh.fit.ott_education_be.model.User;
 import vn.edu.iuh.fit.ott_education_be.repository.FriendRepository;
+import vn.edu.iuh.fit.ott_education_be.repository.MessageRepository;
 import vn.edu.iuh.fit.ott_education_be.repository.UserRepository;
 import vn.edu.iuh.fit.ott_education_be.service.FriendService;
 import vn.edu.iuh.fit.ott_education_be.service.WebSocketService;
@@ -33,6 +34,7 @@ import java.util.Optional;
 public class FriendServiceImpl implements FriendService {
     private final UserRepository userRepository;
     private final FriendRepository friendRepository;
+    private final MessageRepository messageRepository;
     private final WebSocketService webSocketService;
 
     @Override
@@ -87,13 +89,17 @@ public class FriendServiceImpl implements FriendService {
 
         // Map the friends to FriendResponse
         List<FriendResponse> friendResponses = friends.stream()
-                .map(friend -> FriendResponse.builder()
-                        .id(friend.getId())
-                        .name(friend.getFirstName() + " " + friend.getLastName())
-                        .avatar(friend.getAvatar())
-                        .phone(friend.getPhone())
-                        .activeStatus(friend.getActiveStatus())
-                        .build())
+                .map(friend -> {
+                    int unreadCount = (int) messageRepository.countByReceiverIdAndSenderIdAndIsRead(userId, friend.getId(), false);
+                    return FriendResponse.builder()
+                            .id(friend.getId())
+                            .name(friend.getFirstName() + " " + friend.getLastName())
+                            .avatar(friend.getAvatar())
+                            .phone(friend.getPhone())
+                            .activeStatus(friend.getActiveStatus())
+                            .unreadCount(unreadCount)
+                            .build();
+                })
                 .toList();
         log.info("Returning {} friends for user {}", friendResponses.size(), userId);
         return friendResponses;
@@ -116,6 +122,7 @@ public class FriendServiceImpl implements FriendService {
                 .birthday(user.get().getBirthday())
                 .gender(user.get().getGender())
                 .activeStatus(user.get().getActiveStatus())
+                .unreadCount((int) messageRepository.countByReceiverIdAndSenderIdAndIsRead(getCurrentUserId(), friendId, false))
                 .build();
     }
 
@@ -124,6 +131,7 @@ public class FriendServiceImpl implements FriendService {
         String senderId = getCurrentUserId();
 
         User receiverUser = userRepository.findByPhone(phone);
+        throwIf(receiverUser == null, "Receiver not found for phone: {}", "Không tìm thấy người dùng với số điện thoại: " + phone, HttpStatus.NOT_FOUND);
 
         String receiverId = receiverUser.getId();
 
@@ -138,11 +146,18 @@ public class FriendServiceImpl implements FriendService {
         Optional<User> receiver = userRepository.findById(receiverId);
         throwIf(receiver.isEmpty(), "Receiver not found with id: {}", "Không tìm thấy người nhận với id: " + phone, HttpStatus.NOT_FOUND);
 
-        // Check if the receiver is sending request to sender
-        Optional<Friend> existingFriendRequest = friendRepository.findBySenderIdAndReceiverIdAndStatus(senderId, phone, FriendStatus.PENDING);
+        // Check if the sender already sent a request to receiver
+        Optional<Friend> existingFriendRequest = friendRepository.findBySenderIdAndReceiverIdAndStatus(senderId, receiverId, FriendStatus.PENDING);
         if (existingFriendRequest.isPresent()) {
-            log.error("Friend request already sent from {} to {}", senderId, phone);
+            log.error("Friend request already sent from {} to {}", senderId, receiverId);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Yêu cầu kết bạn đã được gửi");
+        }
+
+        // Check if the receiver already sent a request to sender
+        Optional<Friend> reverseFriendRequest = friendRepository.findBySenderIdAndReceiverIdAndStatus(receiverId, senderId, FriendStatus.PENDING);
+        if (reverseFriendRequest.isPresent()) {
+            log.error("Reverse friend request already exists from {} to {}", receiverId, senderId);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Người dùng này đã gửi lời mời cho bạn. Vui lòng chấp nhận lời mời đó.");
         }
 
         // Check if the sender and receiver are already friends
@@ -194,9 +209,10 @@ public class FriendServiceImpl implements FriendService {
         userRepository.save(user.get());
         userRepository.save(friend.get());
 
-        webSocketService.notifyFriendRequestAccepted(user.get().getId(), friend.get().getId());
+        // Notify original sender that their request has been accepted
+        webSocketService.notifyFriendRequestAccepted(receiverId, senderId);
 
-        log.info("Friend request accepted from {} to {}", userId, receiverId);
+        log.info("Friend request accepted from {} to {}", senderId, receiverId);
     }
 
     @Override

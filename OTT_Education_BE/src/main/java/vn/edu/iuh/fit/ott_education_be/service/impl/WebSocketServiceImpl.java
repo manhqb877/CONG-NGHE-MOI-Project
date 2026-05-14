@@ -68,31 +68,34 @@ public class WebSocketServiceImpl implements WebSocketService {
         }
 
         Map<String, Object> notification = new HashMap<>();
+        notification.put("type", "received");
         notification.put("senderId", senderId);
         notification.put("receiverId", receiverId);
 
         template.convertAndSendToUser(receiverId, "/queue/friend/request", notification);
-        log.info("Friend request notification sent to {} from {}", senderId, receiverId);
+        log.info("Friend request notification sent to {} from {}", receiverId, senderId);
     }
 
     @Override
-    public void notifyFriendRequestAccepted(String senderId, String receiverId) {
+    public void notifyFriendRequestAccepted(String acceptedById, String originalSenderId) {
         Map<String, Object> notification = new HashMap<>();
-        notification.put("senderId", senderId);
-        notification.put("receiverId", receiverId);
+        notification.put("type", "accepted");
+        notification.put("senderId", acceptedById);
+        notification.put("receiverId", originalSenderId);
 
-        template.convertAndSendToUser(receiverId, "queue/friend/request/accepted", notification);
-        log.info("Friend request accepted notification sent to {} from {}", receiverId, senderId);
+        template.convertAndSendToUser(originalSenderId, "/queue/friend/request/accepted", notification);
+        log.info("Friend request accepted notification sent to {} from {}", originalSenderId, acceptedById);
     }
 
     @Override
     public void notifyFriendRequestRejected(String userId, String receiverId) {
         Map<String, Object> notification = new HashMap<>();
+        notification.put("type", "rejected");
         notification.put("userId", userId);
         notification.put("receiverId", receiverId);
 
         template.convertAndSendToUser(userId, "/queue/friend/request/rejected", notification);
-        log.info("Friend request rejected notification sent to {} from {}", receiverId, userId);
+        log.info("Friend request rejected notification sent to {} from {}", userId, receiverId);
     }
 
     @Override

@@ -280,12 +280,11 @@ const ContactsManagement = () => {
         <Box sx={{ display: 'flex', height: '100vh', backgroundColor: '#fff' }}>
             {/* NavSidebar */}
             <NavSidebar
-                userProfile={null}
-                currentView="contacts"
-                onViewChange={() => navigate('/home')}
-                onProfileOpen={() => navigate('/home')}
-                onLogout={() => navigate('/')}
-                onOpenChangePasswordModal={() => {}}
+                currentView={currentView}
+                setCurrentView={setCurrentView}
+                user={null}
+                unreadNotifications={pendingRequests.length}
+                onAvatarClick={() => navigate('/home')}
             />
 
             {/* Left Sidebar - Menu List */}

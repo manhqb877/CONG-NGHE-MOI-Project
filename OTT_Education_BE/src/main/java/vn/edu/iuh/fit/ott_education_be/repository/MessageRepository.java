@@ -20,4 +20,6 @@ public interface MessageRepository extends MongoRepository<Message, String> {
     List<Message> findBySenderIdAndReceiverIdOrReceiverIdAndSenderIdAndIsPinned(String userId, String otherUserId, String userId1, String otherUserId1, boolean isPinned);
 
     List<Message> findByGroupIdAndContentContaining(String groupId, String keyword);
+
+    long countByReceiverIdAndSenderIdAndIsRead(String receiverId, String senderId, boolean isRead);
 }

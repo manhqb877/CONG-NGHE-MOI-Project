@@ -31,4 +31,5 @@ public class FriendResponse {
     private Date birthday;
     private Gender gender;
     private UserActiveStatus activeStatus;
+    private int unreadCount;
 }
