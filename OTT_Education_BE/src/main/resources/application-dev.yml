@@ -6,8 +6,8 @@ spring:
         add-properties: true
     data:
         mongodb:
-            uri: mongodb+srv://doankhoe0809_db_user:Tdk08092004@cluster0.t4usdr8.mongodb.net/?appName=Cluster0
-            # uri: mongodb+srv://admin:a7GkOoGANE6vI274@app-chat.xdfkqgl.mongodb.net/?retryWrites=true&w=majority&appName=app-chat
+            # uri: mongodb+srv://doankhoe0809_db_user:Tdk08092004@cluster0.t4usdr8.mongodb.net/?appName=Cluster0
+            uri: mongodb+srv://meimeidev04_db_user:123456Xyz@cluster0.oyeqeds.mongodb.net/?appName=Cluster0
             database: OTT_Education
     jackson:
         time-zone: Asia/Ho_Chi_Minh
