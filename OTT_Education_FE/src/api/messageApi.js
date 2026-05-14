@@ -355,11 +355,17 @@ export function connectWebSocket(
                                     parsedMessage.createdAt ||
                                     parsedMessage.createAt ||
                                     new Date().toISOString(),
-                                recalled: parsedMessage.recalled || false,
+                                recalled:
+                                    parsedMessage.recalled === true ||
+                                    parsedMessage.recalled === 'true',
                                 deletedByUsers:
                                     parsedMessage.deletedByUsers || [],
-                                isRead: parsedMessage.isRead || false,
-                                isPinned: parsedMessage.isPinned || false,
+                                isRead:
+                                    parsedMessage.isRead === true ||
+                                    parsedMessage.isRead === 'true',
+                                isPinned:
+                                    parsedMessage.isPinned === true ||
+                                    parsedMessage.isPinned === 'true',
                                 fileName: parsedMessage.fileName || '',
                                 thumbnail: parsedMessage.thumbnail || '',
                                 publicId: parsedMessage.publicId || '',
@@ -411,12 +417,16 @@ export function connectWebSocket(
                                             parsedMessage.createAt ||
                                             new Date().toISOString(),
                                         recalled:
-                                            parsedMessage.recalled || false,
+                                            parsedMessage.recalled === true ||
+                                            parsedMessage.recalled === 'true',
                                         deletedByUsers:
                                             parsedMessage.deletedByUsers || [],
-                                        isRead: parsedMessage.isRead || false,
+                                        isRead:
+                                            parsedMessage.isRead === true ||
+                                            parsedMessage.isRead === 'true',
                                         isPinned:
-                                            parsedMessage.isPinned || false,
+                                            parsedMessage.isPinned === true ||
+                                            parsedMessage.isPinned === 'true',
                                         fileName: parsedMessage.fileName || '',
                                         thumbnail:
                                             parsedMessage.thumbnail || '',
@@ -580,6 +590,7 @@ export function connectWebSocket(
                     (message) => {
                         try {
                             const parsedMessage = JSON.parse(message.body);
+                            parsedMessage.type = parsedMessage.type || 'received';
                             console.log(
                                 'Friend request notification:',
                                 parsedMessage,
@@ -594,6 +605,62 @@ export function connectWebSocket(
                         } catch (error) {
                             console.error(
                                 'Error parsing friend request notification:',
+                                error,
+                            );
+                        }
+                    },
+                    { Authorization: `Bearer ${token}` },
+                );
+
+                // Subscription cho thông báo yêu cầu kết bạn đã được chấp nhận
+                client.subscribe(
+                    `/user/${userId}/queue/friend/request/accepted`,
+                    (message) => {
+                        try {
+                            const parsedMessage = JSON.parse(message.body);
+                            parsedMessage.type = parsedMessage.type || 'accepted';
+                            console.log(
+                                'Friend request accepted notification:',
+                                parsedMessage,
+                            );
+                            if (onFriendRequestCallback) {
+                                onFriendRequestCallback(parsedMessage);
+                            } else {
+                                console.warn(
+                                    'onFriendRequestCallback is not defined',
+                                );
+                            }
+                        } catch (error) {
+                            console.error(
+                                'Error parsing friend request accepted notification:',
+                                error,
+                            );
+                        }
+                    },
+                    { Authorization: `Bearer ${token}` },
+                );
+
+                // Subscription cho thông báo yêu cầu kết bạn bị từ chối
+                client.subscribe(
+                    `/user/${userId}/queue/friend/request/rejected`,
+                    (message) => {
+                        try {
+                            const parsedMessage = JSON.parse(message.body);
+                            parsedMessage.type = parsedMessage.type || 'rejected';
+                            console.log(
+                                'Friend request rejected notification:',
+                                parsedMessage,
+                            );
+                            if (onFriendRequestCallback) {
+                                onFriendRequestCallback(parsedMessage);
+                            } else {
+                                console.warn(
+                                    'onFriendRequestCallback is not defined',
+                                );
+                            }
+                        } catch (error) {
+                            console.error(
+                                'Error parsing friend request rejected notification:',
                                 error,
                             );
                         }

@@ -381,6 +381,23 @@ const MessageItem = ({
 
                 {renderContent()}
             </MessageBubble>
+
+            {/* Timestamp */}
+            <Typography
+                variant="caption"
+                sx={{
+                    fontSize: '0.7rem',
+                    opacity: 0.6,
+                    mt: 0.5,
+                    textAlign: isSender ? 'right' : 'left',
+                    color: '#7589a3',
+                }}
+            >
+                {message.createAt ? new Date(message.createAt).toLocaleTimeString('vi-VN', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                }) : ''}
+            </Typography>
         </MessageContainer>
     );
 };

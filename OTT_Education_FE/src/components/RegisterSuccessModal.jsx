@@ -6,8 +6,8 @@ import {
     Button,
     Typography,
     Box,
-    Check,
 } from '@mui/material';
+import Check from '@mui/icons-material/Check';
 
 const RegisterSuccessModal = ({ open, onClose, onLoginClick }) => {
     const handleLogin = () => {
